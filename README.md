@@ -1,236 +1,168 @@
-# localGPT-Vision
-[![GitHub Stars](https://img.shields.io/github/stars/PromtEngineer/localGPT-Vision?style=social)](https://github.com/PromtEngineer/localGPT-Vision/stargazers)
-[![GitHub Forks](https://img.shields.io/github/forks/PromtEngineer/localGPT-Vision?style=social)](https://github.com/PromtEngineer/localGPT-Vision/network/members)
-[![GitHub Issues](https://img.shields.io/github/issues/PromtEngineer/localGPT-Vision)](https://github.com/PromtEngineer/localGPT-Vision/issues)
-[![GitHub Pull Requests](https://img.shields.io/github/issues-pr/PromtEngineer/localGPT-Vision)](https://github.com/PromtEngineer/localGPT-Vision/pulls)
-[![Twitter Follow](https://img.shields.io/twitter/follow/engineerrprompt?style=social)](https://twitter.com/engineerrprompt)
+README.md
 
+# VisionVault-PDFRAG
 
-[Watch the video on YouTube](https://youtu.be/YPs4eGDpIY4)
+VisionVault-PDFRAG is an advanced, vision-based Retrieval-Augmented Generation (RAG) system for document analysis and question-answering.
 
+## Key Features
 
-localGPT-Vision is an end-to-end vision-based Retrieval-Augmented Generation (RAG) system. It allows users to upload and index documents (PDFs and images), ask questions about the content, and receive responses along with relevant document snippets. The retrieval is performed using the [Colqwen](https://huggingface.co/vidore/colqwen2-v0.1) or [ColPali](https://huggingface.co/blog/manu/colpali) models, and the retrieved pages are passed to a Vision Language Model (VLM) for generating responses. Currently, the code supports these VLMs: 
+- **OCR-Free Document Processing**: Uses visual embeddings to understand documents without text extraction.
+- **Multi-Format Support**: Handles PDFs and images seamlessly.
+- **Intelligent Retrieval**: Leverages ColPali or ColQwen for efficient document page retrieval.
+- **Flexible Response Generation**: Utilizes various Vision Language Models (VLMs) for comprehensive answers.
+- **User-Friendly Interface**: Offers a chat-based interface for easy interaction.
+- **Session Management**: Enables creation, renaming, and switching between chat sessions.
+- **Persistent Storage**: Saves indexes and sessions for future use.
 
-- [Qwen2-VL-7B-Instruct](https://huggingface.co/Qwen/Qwen2-VL-7B-Instruct)
-- [LLAMA-3.2-11B-Vision](https://huggingface.co/meta-llama/Llama-3.2-11B-Vision)
-- [Pixtral-12B-2409](https://huggingface.co/mistralai/Pixtral-12B-2409)
-- [Molmo-7B-O-0924](https://huggingface.co/allenai/Molmo-7B-O-0924)
-- [Google Gemini](https://aistudio.google.com/app/prompts/new_chat)
-- [OpenAI GPT-4o](https://platform.openai.com/docs/guides/vision)
+## How It Works
 
-The project is built on top of the [Byaldi](https://github.com/AnswerDotAI/byaldi) library.
+1. **Document Indexing**:
+   - Converts uploaded documents to visual embeddings.
+   - Stores these embeddings for quick retrieval.
 
-## Table of Contents
-- [Features](#features)
-- [Architecture](#architecture)
-- [Prerequisites](#prerequisites)
-- [Installation](#installation)
-- [Usage](#usage)
-- [Project Structure](#project-structure)
-- [System Workflow](#system-workflow)
-- [Contributing](#contributing)
+2. **Query Processing**:
+   - Matches user queries against stored visual embeddings.
+   - Retrieves the most relevant document pages.
 
-## Features
-- End-to-End Vision-Based RAG: Combines visual document retrieval with language models for comprehensive answers.
-- Document Upload and Indexing: Upload PDFs and images, which are then indexed using ColPali for retrieval.
-- Chat Interface: Engage in a conversational interface to ask questions about the uploaded documents.
-- Session Management: Create, rename, switch between, and delete chat sessions.
-- Model Selection: Choose between different Vision Language Models (Qwen2-VL-7B-Instruct, Google Gemini, OpenAI GPT-4 etc).
-- Persistent Indexes: Indexes are saved on disk and loaded upon application restart. 
+3. **Response Generation**:
+   - Passes retrieved pages to a chosen VLM.
+   - Generates responses based on visual and textual content.
 
-## Architecture
-localGPT-Vision is built as an end-to-end vision-based RAG system. T he architecture comprises two main components:
+## Supported Models
 
-1. Visual Document Retrieval with Colqwen and ColPali:
-   - [Colqwen](https://huggingface.co/vidore/colqwen2-v0.1) and [ColPali](https://huggingface.co/blog/manu/colpali) are Vision Encoders designed for efficient document retrieval solely using the image representation of document pages.
-   - It embeds page images directly, leveraging visual cues like layout, fonts, figures, and tables without relying on OCR or text extraction.
-   - During indexing, document pages are converted into image embeddings and stored.
-   - During querying, the user query is matched against these embeddings to retrieve the most relevant document pages.
-   
-   ![ColPali](https://cdn-uploads.huggingface.co/production/uploads/60f2e021adf471cbdf8bb660/La8vRJ_dtobqs6WQGKTzB.png)
+- **Retrieval**: ColPali, ColQwen
+- **Response Generation**: Qwen2-VL-7B-Instruct, OpenAI GPT-4o,
 
-2. Response Generation with Vision Language Models:
-   - The retrieved document images are passed to a Vision Language Model (VLM).
-   - Supported models include Qwen2-VL-7B-Instruct, LLAMA3.2, Pixtral, Molmo, Google Gemini, and OpenAI GPT-4.
-   - These models generate responses by understanding both the visual and textual content of the documents.
-   - NOTE: The quality of the responses is highly dependent on the VLM used and the resolution of the document images.
+## Getting Started
 
-This architecture eliminates the need for complex text extraction pipelines and provides a more holistic understanding of documents by considering their visual elements. You don't need any chunking strategies or selection of embeddings model or retrieval strategy used in traditional RAG systems.
+### Prerequisites
 
-## Prerequisites
-- Anaconda or Miniconda installed on your system
-- Python 3.10 or higher
-- Git (optional, for cloning the repository)
+- Anaconda or Miniconda
+- Python 3.10+
+- Git
+- LLM API keys if you want to run non-local workflows
 
-## Installation
-Follow these steps to set up and run the application on your local machine.
+### Installation
 
-1. Clone the Repository
+1. Clone the repository:
    ```bash
-   git clone https://github.com/PromtEngineer/localGPT-Vision.git
-   cd localGPT-Vision
+   git clone https://github.com/PromtEngineer/VisionVault-PDFRAG.git
+   cd VisionVault-PDFRAG
    ```
 
-2. Create a Conda Environment
+2. Set up the environment:
    ```bash
-   conda create -n localgpt-vision python=3.10
-   conda activate localgpt-vision
-   ```
-
-3a. Install Dependencies
-   ```bash
+   conda create -n visionvault-pdfrag python=3.10
+   conda activate visionvault-pdfrag
    pip install -r requirements.txt
+   pip install git+https://github.com/huggingface/transformers
    ```
 
-3b. Install Transformers from HuggingFace - Dev version
-   ```bash
-    pip uninstall transformers
-    pip install git+https://github.com/huggingface/transformers
-   ```
+3. Configure API keys:
 
-4. Set Environment Variables
-   Set your API keys for Google Gemini and OpenAI GPT-4:
+### 3.1. For Local Development
 
-   ```bash
-   export GENAI_API_KEY='your_genai_api_key'
-   export OPENAI_API_KEY='your_openai_api_key'
-   export GROQ_API_KEY='your_groq_api_key'
-   ```
+If you're running the project locally, you can set the API key as an environment variable:
 
-   On Windows Command Prompt:
-   ```cmd
-   set GENAI_API_KEY=your_genai_api_key
-   set OPENAI_API_KEY=your_openai_api_key
-   set GROQ_API_KEY='your_groq_api_key'
-   ```
+```bash
+export OPENAI_API_KEY='your_openai_api_key_here'
+```
 
-5. Run the Application
+Replace 'your_openai_api_key_here' with your actual OpenAI API key.
+
+For persistence across terminal sessions, you can add this line to your `~/.bashrc` or `~/.zshrc` file.
+
+### 3.2. For Terraform Deployment
+
+When deploying with Terraform, you'll need to provide the API key as a variable during the `terraform apply` command:
+
+```bash
+terraform apply -var="OPENAI_API_KEY=your_openai_api_key_here"
+```
+
+We ignore the lower-case naming convention for this variable name.
+
+Alternatively, you can create a `terraform.tfvars` file in your project directory with the following content:
+
+```hcl
+openai_api_key = "your_openai_api_key_here"
+```
+
+⚠️ **Important Security Note**: 
+- Never commit your API key to version control. 
+- If using a `terraform.tfvars` file, make sure it's listed in your `.gitignore`.
+- For CI/CD pipelines, use secure environment variables or secrets management provided by your CI/CD tool.
+
+### 3.3 Verifying the API Key
+
+To verify that your API key is correctly set, you can run the following command:
+
+For local development:
+```bash
+echo $OPENAI_API_KEY
+```
+
+For Terraform (after apply):
+```bash
+terraform output openai_api_key
+```
+
+If configured correctly, these commands should display your API key (or a masked version of it in the case of Terraform).
+
+4. Launch the application:
    ```bash
    python app.py
    ```
 
-6. Access the Application
-   Open your web browser and navigate to:
-   ```
-   http://localhost:5050/
-   ```
+4.1 After launching the app
 
-## Usage
-### Upload and Index Documents
-1. Click on "New Chat" to start a new session.
-2. Under "Upload and Index Documents", click "Choose Files" and select your PDF or image files.
-3. Click "Upload and Index". The documents will be indexed using ColPali and ready for querying.
+- a `chat_messages.html` file will be created: this file creates a visual chat history where you can see who said what, and any images that were part of the conversation
 
-### Ask Questions
-1. In the "Enter your question here" textbox, type your query related to the uploaded documents.
-2. Click "Send". The system will retrieve relevant document pages and generate a response using the selected Vision Language Model.
 
-### Manage Sessions
-- Rename Session: Click "Edit Name", enter a new name, and click "Save Name".
-- Switch Sessions: Click on a session name in the sidebar to switch to that session.
-- Delete Session: Click "Delete" next to a session to remove it permanently.
+5. Access the web interface at `http://localhost:5050/`
 
-### Settings
-1. Click on "Settings" in the navigation bar.
-2. Select the desired language model and image dimensions.
-3. Click "Save Settings".
+## Usage Guide
+
+1. **Start a New Chat**:
+   - Click "New Chat" to begin a session.
+
+2. **Upload Documents**:
+   - Choose PDF or image files.
+   - Click "Upload and Index" to process documents.
+
+3. **Ask Questions**:
+   - Type your query in the chat box.
+   - Click "Send" to get responses.
+
+4. **Manage Sessions**:
+   - Rename, switch, or delete sessions as needed.
+
+5. **Adjust Settings**:
+   - Select preferred language models and image dimensions.
 
 ## Project Structure
+
 ```
-localGPT-Vision/
-├── app.py
-├── logger.py
-├── models/
-│   ├── indexer.py
-│   ├── retriever.py
-│   ├── responder.py
-│   ├── model_loader.py
-│   └── converters.py
-├── sessions/
-├── templates/
-│   ├── base.html
-│   ├── chat.html
-│   ├── settings.html
-│   └── index.html
-├── static/
-│   ├── css/
-│   │   └── style.css
-│   ├── js/
-│   │   └── script.js
-│   └── images/
-├── uploaded_documents/
-├── byaldi_indices/
-├── requirements.txt
-├── .gitignore
-└── README.md
+VisionVault-PDFRAG/
+├── app.py                 # Main Flask application
+├── models/                # Core functionality modules
+├── templates/             # HTML templates
+├── static/                # CSS, JavaScript, and images
+├── uploaded_documents/    # Storage for uploaded files
+├── byaldi_indices/        # Storage for document indexes
+└── sessions/              # Session data storage
 ```
 
-- `app.py`: Main Flask application.
-- `logger.py`: Configures application logging.
-- `models/`: Contains modules for indexing, retrieving, and responding.
-- `templates/`: HTML templates for rendering views.
-- `static/`: Static files like CSS and JavaScript.
-- `sessions/`: Stores session data.
-- `uploaded_documents/`: Stores uploaded documents.
-- `.byaldi/`: Stores the indexes created by Byaldi.
-- `requirements.txt`: Python dependencies.
-- `.gitignore`: Files and directories to be ignored by Git.
-- `README.md`: Project documentation.
+## Adding your favorite models
 
-## System Workflow
-1. User Interaction: The user interacts with the web interface to upload documents and ask questions.
-2. Document Indexing with ColPali:
-   - Uploaded documents are converted to PDFs if necessary.
-   - Documents are indexed using ColPali, which creates embeddings based on the visual content of the document pages.
-   - The indexes are stored in the byaldi_indices/ directory.
-3. Session Management:
-   - Each chat session has a unique ID and stores its own index and chat history.
-   - Sessions are saved on disk and loaded upon application restart.
-4. Query Processing:
-   - User queries are sent to the backend.
-   - The query is embedded and matched against the visual embeddings of document pages to retrieve relevant pages.
-5. Response Generation with Vision Language Models:
-   - The retrieved document images and the user query are passed to the selected Vision Language Model (Qwen, Gemini, or GPT-4).
-   - The VLM generates a response by understanding both the visual and textual content of the documents.
-6. Display Results:
-   - The response and relevant document snippets are displayed in the chat interface.
-
-```mermaid
-graph TD
-    A[User] -->|Uploads Documents| B(Flask App)
-    B -->|Saves Files| C[uploaded_documents/]
-    B -->|Converts and Indexes with ColPali| D[Indexing Module]
-    D -->|Creates Visual Embeddings| E[byaldi_indices/]
-    A -->|Asks Question| B
-    B -->|Embeds Query and Retrieves Pages| F[Retrieval Module]
-    F -->|Retrieves Relevant Pages| E
-    F -->|Passes Pages to| G[Vision Language Model]
-    G -->|Generates Response| B
-    B -->|Displays Response| A
-    B -->|Saves Session Data| H[sessions/]
-    subgraph Backend
-        B
-        D
-        F
-        G
-    end
-    subgraph Storage
-        C
-        E
-        H
-    end
-```
-
-## Contributing
-Contributions are welcome! Please follow these steps:
+To add in new models or domain-specific models do this:
 
 1. Fork the repository.
-2. Create a new branch for your feature: `git checkout -b feature-name`.
-3. Commit your changes: `git commit -am 'Add new feature'`.
-4. Push to the branch: `git push origin feature-name`.
+2. Create a feature branch: `git checkout -b new-feature`
+3. Commit your changes: `git commit -am 'Add new feature'`
+4. Push to the branch: `git push origin new-feature`
 5. Submit a pull request.
 
-## Star History
+## Learn More
 
-[![Star History Chart](https://api.star-history.com/svg?repos=PromtEngineer/localGPT-Vision&type=Date)](https://star-history.com/#PromtEngineer/localGPT-Vision&Date)
-
+For a detailed understanding of the system's workflow and architecture, please refer to the full documentation which will be written mid-to-late October 2024.

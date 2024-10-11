@@ -1,16 +1,21 @@
-Flask
+# Web framework
+flask
+
+#ColPali
 byaldi
+
+# Core ML libraries
 torch
 torchvision
-google-generativeai
-openai
-docx2pdf
+
+# Project-specific libraries
 qwen-vl-utils
-vllm>=0.6.1.post1
-mistral_common>=1.4.1
+
+# API integration
+openai
+
+# Utility libraries
 einops
-mistral_common[opencv]
-mistral_common
-mistral_inference
-groq
+docx2pdf
 markdown
+
