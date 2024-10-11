@@ -109,6 +109,13 @@ terraform output openai_api_key
 
 If configured correctly, these commands should display your API key (or a masked version of it in the case of Terraform).
 
+### 3.4 Installing `vllm`
+`vllm` is a A high-throughput and memory-efficient inference and serving engine for large language models (LLMs). This script detects if you have a CUDA-compliant GPU on your system and if so will install the `vllm` GPU version for you; if no GPU is detected, the CPU-only version of `vllm` will be installed. Learn more about the `vllm` installation process [here](https://docs.vllm.ai/en/stable/getting_started/installation.html).
+
+  ```bash
+   python install_vllm.py
+   ```
+
 4. Launch the application:
    ```bash
    python app.py
