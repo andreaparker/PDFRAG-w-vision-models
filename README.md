@@ -116,17 +116,17 @@ If configured correctly, these commands should display your API key (or a masked
    python install_vllm.py
    ```
 
-4. Launch the application:
+### 4. Launch the application:
    ```bash
    python app.py
    ```
 
-4.1 After launching the app
+### 4.1 After launching the app
 
 - a `chat_messages.html` file will be created: this file creates a visual chat history where you can see who said what, and any images that were part of the conversation
 
 
-5. Access the web interface at `http://localhost:5050/`
+### 5. Access the web interface at `http://localhost:5050/`
 
 ## Usage Guide
 
