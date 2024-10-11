@@ -5,6 +5,7 @@ import torch
 from transformers import Qwen2VLForConditionalGeneration, AutoProcessor
 from vllm.sampling_params import SamplingParams
 from vllm import LLM
+from groq import Groq
 
 from dotenv import load_dotenv
 
@@ -51,7 +52,6 @@ def load_model(model_choice):
         _model_cache[model_choice] = (model, processor, device)
         logger.info("Qwen model loaded and cached.")
         return _model_cache[model_choice]
-    
     else:
         logger.error(f"Invalid model choice: {model_choice}")
         raise ValueError("Invalid model choice.")
