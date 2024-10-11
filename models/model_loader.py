@@ -5,7 +5,6 @@ import torch
 from transformers import Qwen2VLForConditionalGeneration, AutoProcessor
 from vllm.sampling_params import SamplingParams
 from vllm import LLM
-from groq import Groq
 
 from dotenv import load_dotenv
 
